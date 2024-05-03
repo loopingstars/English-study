@@ -1,0 +1,35 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+
+#header{
+    margin-bottom: 50px;
+}
+
+#header-logo{
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+#menu{
+    display: grid;
+    grid-template-columns: 40vh;
+    grid-template-rows:10vh 10vh 10vh 10vh 10vh;
+    justify-content: center;
+}
+.menu-m{
+    background-color: rgb(231, 223, 223);
+    margin-bottom: 17px;
+    text-align: center;
+    border-radius: 80px;
+    
+}
+.link{
+    text-decoration: none;
+    color: black;
+}
+
+.text-group{
+    text-align: center;
+    
+}
