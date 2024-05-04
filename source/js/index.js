@@ -17,7 +17,7 @@ var AudioTexto = [];
 ///////////////////////////////
 function read_CSV(file, callback) {
   const reader = new FileReader();
-  reader.onload = function(event) {
+  reader.onload = function (event) {
     const content = event.target.result;
     callback(content);
   };
@@ -28,7 +28,7 @@ function read_CSV(file, callback) {
 ////Juntar AUDIO + TEXTO 
 ///////////////////////////////
 function AudioTextoArray() {
-  
+
 }
 ///////////////////////////////
 ////Popular array de audios
@@ -53,7 +53,7 @@ function Convert_CSV(conteudoCSV) {
 ///////////////////////////////
 function CriarDIV(texto, number) {
   let variable = document.createElement('div');
-  variable.innerHTML = '<div class="Texti" onclick="TextoAction(' +number+ ')"></div>';
+  variable.innerHTML = '<div class="Texti" onclick="TextoAction(' + number + ')"></div>';
   Main.appendChild(variable);
 }
 ///////////////////////////////
@@ -61,12 +61,12 @@ function alterarDIV(texto, number) {
   let divs = document.querySelectorAll(".Texti")[number];
   divs.id = "texto" + number;
   divs.innerHTML = texto;
-  
+
 }
 ///////////////////////////////
 ////Iniciar audio
 ///////////////////////////////
-function play_audio(Path){
+function play_audio(Path) {
   audioSelect.setAttribute('src', Path);
   audioSelect.play();
 }
@@ -103,12 +103,12 @@ function TextoAction(number) {
 
 ///////////////////////////////
 function iniciar() {
-  for (var i = 0; i < textArray.length -1; i++) {
+  for (var i = 0; i < textArray.length - 1; i++) {
     CriarDIV(textArray[i][0], i);
   }
-  for (var i = 0; i < textArray.length -1; i++) {
+  for (var i = 0; i < textArray.length - 1; i++) {
     alterarDIV(textArray[i][0], i);
-    
+
   }
 }
 
@@ -116,7 +116,10 @@ button.addEventListener("click", () => {
   iniciar();
 });
 
-
+document.querySelector("#setaCurva").addEventListener('click', () => {
+  document.querySelector('.square').classList.toggle('setaAnimation');
+  document.querySelector('.square2').classList.toggle('menuAnimation');
+});
 
 
 
