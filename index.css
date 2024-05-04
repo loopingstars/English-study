@@ -1,9 +1,19 @@
 body{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(223, 223, 223);
 }
+#Main{
+    background-color: #000000;
+    height: 100vh;
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    
 
+}
 #header{
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    background-color: #000000;
+    
 }
 
 #header-logo{
@@ -13,23 +23,81 @@ body{
 }
 #menu{
     display: grid;
-    grid-template-columns: 40vh;
-    grid-template-rows:10vh 10vh 10vh 10vh 10vh;
-    justify-content: center;
+    grid-template-columns: 29vh ;
+    grid-template-rows:5vh 5vh 5vh 10vh;
+    justify-content:center;
+    align-items:center;
 }
-.menu-m{
-    background-color: rgb(231, 223, 223);
-    margin-bottom: 17px;
-    text-align: center;
-    border-radius: 80px;
+/*Personalização dos items em questão*/
+#input{
+
+}
+.inputs{
     
 }
-.link{
-    text-decoration: none;
-    color: black;
+#filepicker{
+
+}
+#Modulo{
+
+}
+/*Botao */
+#button{
+  background-colrgb(255, 255, 255)#333; /* Green */
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: #333333;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor:pointer;
+}
+#button:hover{
+    background-color: #524e4e;
 }
 
-.text-group{
+/*TEXTO DE ESTUDO*/
+.Texti{
+    color: azure;
     text-align: center;
-    
+    font-size: 150%;
+    font-family: 'Times New Roman', Times, serif;
+    padding-top: 15px;
 }
+.Texti:hover{
+    color: rgb(79, 174, 230);
+    font-size: 200%;
+    cursor: pointer;
+}
+/*INPUTS FILES*/
+input[type="file"] {
+    display: none;
+}
+/*INPUT FILES */
+.labels {
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: #ffffff7a;
+    color: #000000;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+/*MODULO SELETOR*/
+select {
+    // A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    /*// Additional resets for further consistency*/
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+  }

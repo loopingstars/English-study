@@ -3,8 +3,8 @@
 
 <head>
      <meta charset="UTF-8">
-     <link rel="stylesheet" href="./index.css">
-     <link rel="stylesheet" href="./reset.css">
+     <link rel="stylesheet" href="/index.css">
+     <link rel="stylesheet" href="/reset.css">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>line by line, english study site.</title>
 </head>
@@ -17,13 +17,15 @@
 
      <audio id="audio-play" src=""></audio>
      <menu id="menu">
-          <input id="input" type="file">
-          <input type="file" id="filepicker" fileList" webkitdirectory multiple />
-          <input id="button" type="button" value="enviar">
+          <label class="labels" for="input">Textos</label>
+          <label class="labels" for="filepicker">Audios</label>
+          <input class="inputs" id="input" type="file">
+          <input class="inputs" type="file" id="filepicker" fileList" webkitdirectory multiple />
           <select name="Module" id="Modulo">
-               <option value="/Módulo2/">Modulo2</option>
-               <option value="/Módulo3/">Modulo3</option>
+               <option class="options" value="/Módulo2/">Modulo2</option>
+               <option class="options" value="/Módulo3/">Modulo3</option>
            </select>
+           <input id="button" type="button" value="Start">
      </menu>
      <main id="Main">
      </main>

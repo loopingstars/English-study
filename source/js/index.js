@@ -33,13 +33,7 @@ function AudioTextoArray() {
 ///////////////////////////////
 ////Popular array de audios
 ///////////////////////////////
-function audio_arrays_populate(event){
-    for (const file of event.target.files) {
-      let text = String(file.webkitRelativePath);
-      AudioArray.push(text);
-    }
-    
-}
+
 ///////////////////////////////
 function Convert_CSV(conteudoCSV) {
   const lines = conteudoCSV.split('\n');
@@ -59,8 +53,7 @@ function Convert_CSV(conteudoCSV) {
 ///////////////////////////////
 function CriarDIV(texto, number) {
   let variable = document.createElement('div');
-  variable.innerHTML = '<div class="Texti" onclick="TextoAction()"></div>';
-  
+  variable.innerHTML = '<div class="Texti" onclick="TextoAction(' +number+ ')"></div>';
   Main.appendChild(variable);
 }
 ///////////////////////////////
@@ -78,6 +71,7 @@ function play_audio(Path){
   audioSelect.play();
 }
 ///////////////////////////////
+////Popular array de audios
 document.getElementById("filepicker").addEventListener(
   "change",
   (event) => {
@@ -88,7 +82,7 @@ document.getElementById("filepicker").addEventListener(
   },
   false,
 );
-
+////Popular arrayDeTexto
 input.addEventListener('change', function (event) {
   const arquive = event.target.files[0];
   read_CSV(arquive, function (content) {
@@ -98,9 +92,8 @@ input.addEventListener('change', function (event) {
 ///////////////////////////////
 ////Texto Action
 ///////////////////////////////
-function TextoAction() {
-  let Path = (modulo.options[modulo.selectedIndex].value + AudioArray[0]);
-  console.log(Path);
+function TextoAction(number) {
+  let Path = (modulo.options[modulo.selectedIndex].value + AudioArray[number]);
   play_audio(Path)
 }
 ///////////////////////////////
@@ -114,7 +107,7 @@ function iniciar() {
     CriarDIV(textArray[i][0], i);
   }
   for (var i = 0; i < textArray.length -1; i++) {
-    alterarDIV(textArray[i][1], i);
+    alterarDIV(textArray[i][0], i);
     
   }
 }
