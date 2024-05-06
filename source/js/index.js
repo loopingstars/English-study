@@ -7,9 +7,13 @@ var conteudoCSV = document.querySelector("#input");
 var audioSelect = document.querySelector("#audio-play");
 var modulo = document.querySelector('#Modulo');
 var Main = document.querySelector("#Main");
+var faixaAtual = document.querySelector("#faixaAtual");
 var textArray = [];
 var AudioArray = [];
 var AudioTexto = [];
+var audioIndexAudios = 0;
+var faixaAudio = 0;
+var listenerAudioEnd = false;
 ///////////////////////////////
 
 ///////////////////////////////
@@ -24,12 +28,7 @@ function read_CSV(file, callback) {
   reader.readAsText(file);
 }
 ///////////////////////////////
-///////////////////////////////
-////Juntar AUDIO + TEXTO 
-///////////////////////////////
-function AudioTextoArray() {
 
-}
 ///////////////////////////////
 ////Popular array de audios
 ///////////////////////////////
@@ -42,6 +41,7 @@ function Convert_CSV(conteudoCSV) {
   lines.forEach(function (line) {
     const values = line.split(',');
     arrayCSV.push(values);
+
   });
 
   return arrayCSV;
@@ -52,17 +52,36 @@ function Convert_CSV(conteudoCSV) {
 ////Criar DIV
 ///////////////////////////////
 function CriarDIV(texto, number) {
-  let variable = document.createElement('div');
-  variable.innerHTML = '<div class="Texti" onclick="TextoAction(' + number + ')"></div>';
-  Main.appendChild(variable);
-}
-///////////////////////////////
-function alterarDIV(texto, number) {
-  let divs = document.querySelectorAll(".Texti")[number];
-  divs.id = "texto" + number;
-  divs.innerHTML = texto;
+  let TextoDiv = document.createElement('div');
+  let textoIngles = document.createElement('span');
+  let textoTraduzido = document.createElement('span');
+  TextoDiv.innerHTML = '<div class="Texti" onclick="TextoAction(' + number + ')"></div>';
+  textoIngles.innerHTML = '<span class="TextoIngles" id="teste" onclick="TextoAction(' + number + ')"></span>';
+  textoTraduzido.innerHTML = '<span class="TextoTraduzido" onclick="TextoAction(' + number + ')"></span';
+  Main.appendChild(TextoDiv);
+  TextoDiv.appendChild(textoIngles);
+  TextoDiv.appendChild(textoTraduzido);
 
 }
+///////////////////////////////
+///////////////////////////////
+////Alterar valoes da div
+///////////////////////////////
+function alterarDIV(textoInglesParam, textoTraduzidoParam, number) {
+  let div = document.querySelectorAll(".Texti")[number];
+  let textoIngles = document.querySelectorAll(".TextoIngles")[number];
+  let textoTraduzido = document.querySelectorAll(".TextoTraduzido")[number];
+  div.id = "texto" + number;
+  textoIngles.id = "texto" + number;
+  textoTraduzido.id = "texto" + number;
+  textoIngles.innerHTML = textoInglesParam;
+  textoTraduzido.innerHTML = textoTraduzidoParam;
+  div.classList.toggle('TextiJS');
+  textoIngles.classList.toggle('TextoInglesJS');
+  textoTraduzido.classList.toggle('TextoTraduzidoJS');
+}
+///////////////////////////////
+
 ///////////////////////////////
 ////Iniciar audio
 ///////////////////////////////
@@ -70,8 +89,11 @@ function play_audio(Path) {
   audioSelect.setAttribute('src', Path);
   audioSelect.play();
 }
+
+
 ///////////////////////////////
 ////Popular array de audios
+///////////////////////////////
 document.getElementById("filepicker").addEventListener(
   "change",
   (event) => {
@@ -98,29 +120,85 @@ function TextoAction(number) {
 }
 ///////////////////////////////
 ///////////////////////////////
-////Comparar Arrays
+////Animação das setas
+///////////////////////////////
+document.querySelector("#setaCurva").addEventListener('click', () => {
+
+});
+///////////////////////////////
+///////////////////////////////
+////Alterar tema do site
+///////////////////////////////
+document.querySelector('#diaEnoite').addEventListener('click', () => {
+
+});
+///////////////////////////////
+function executarAudios() {
+  if (audioIndexAudios == textArray.length) {
+    listenerAudioEnd = false;
+  }
+  if (audioIndexAudios <= textArray.length && listenerAudioEnd == true) {
+    play_audio(modulo.options[modulo.selectedIndex].value + AudioArray[audioIndexAudios]);
+    audioIndexAudios++;
+  }
+}
+///////////////////////////////
+////Verificar tecla digitada 
+////e executar o audio.
+///////////////////////////////
+document.addEventListener("keydown", function (event) {
+
+  if (event.key == 'a' && faixaAudio >= 1) {
+    faixaAudio--;
+    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0];
+  }
+  if (event.key == 's') {
+    play_audio(modulo.options[modulo.selectedIndex].value + AudioArray[faixaAudio]);
+  }
+  if (event.key == 'd' && faixaAudio <= textArray.length - 1) {
+    faixaAudio++;
+    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0];
+  }
+  if (event.key == 'e') {
+    document.querySelector('.square2').classList.toggle('menuAnimation');
+  }
+
+  if (event.key == 'r') {
+    listenerAudioEnd = true;
+    executarAudios();
+  }
+  if (event.key == 'p') {
+    audioSelect.pause();
+    listenerAudioEnd = false;
+
+  }
+
+});
+
+audioSelect.addEventListener('ended', () => {
+  if (audioIndexAudios == textArray.length) {
+    listenerAudioEnd = false;
+  }
+  if (audioIndexAudios < textArray.length && listenerAudioEnd == true) {
+    executarAudios();
+  }
+
+});
 ///////////////////////////////
 
 ///////////////////////////////
 function iniciar() {
+
   for (var i = 0; i < textArray.length - 1; i++) {
     CriarDIV(textArray[i][0], i);
   }
   for (var i = 0; i < textArray.length - 1; i++) {
-    alterarDIV(textArray[i][0], i);
-
+    alterarDIV(textArray[i][0], textArray[i][1], i);
   }
 }
-
 button.addEventListener("click", () => {
   iniciar();
 });
-
-document.querySelector("#setaCurva").addEventListener('click', () => {
-  document.querySelector('.square').classList.toggle('setaAnimation');
-  document.querySelector('.square2').classList.toggle('menuAnimation');
-});
-
-
+///////////////////////////////
 
 
