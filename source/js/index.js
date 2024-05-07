@@ -1,13 +1,14 @@
 ///////////////////////////////
 ////Variaveis
 ///////////////////////////////
-var button = document.querySelector("#button")
-var Text = document.querySelectorAll(".Texti");
-var conteudoCSV = document.querySelector("#input");
+var button = document.querySelector('#button')
+var Text = document.querySelectorAll('Texti');
+var conteudoCSV = document.querySelector('#input');
 var audioSelect = document.querySelector("#audio-play");
 var modulo = document.querySelector('#Modulo');
-var Main = document.querySelector("#Main");
-var faixaAtual = document.querySelector("#faixaAtual");
+var Main = document.querySelector('#Main');
+var faixaAtual = document.querySelector('#faixaAtual');
+var texCompleto = document.querySelector('#TextoCompleto')
 var textArray = [];
 var AudioArray = [];
 var AudioTexto = [];
@@ -74,8 +75,8 @@ function alterarDIV(textoInglesParam, textoTraduzidoParam, number) {
   div.id = "texto" + number;
   textoIngles.id = "texto" + number;
   textoTraduzido.id = "texto" + number;
-  textoIngles.innerHTML = textoInglesParam;
-  textoTraduzido.innerHTML = textoTraduzidoParam;
+  textoIngles.innerHTML = textoInglesParam.replace(";", ",");
+  textoTraduzido.innerHTML = textoTraduzidoParam.replace(";", ",");
   div.classList.toggle('TextiJS');
   textoIngles.classList.toggle('TextoInglesJS');
   textoTraduzido.classList.toggle('TextoTraduzidoJS');
@@ -150,14 +151,14 @@ document.addEventListener("keydown", function (event) {
 
   if (event.key == 'a' && faixaAudio >= 1) {
     faixaAudio--;
-    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0];
+    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0].replace(";", ",");
   }
   if (event.key == 's') {
     play_audio(modulo.options[modulo.selectedIndex].value + AudioArray[faixaAudio]);
   }
-  if (event.key == 'd' && faixaAudio <= textArray.length - 1) {
+  if (event.key == 'd' && faixaAudio <= textArray.length - 2) {
     faixaAudio++;
-    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0];
+    faixaAtual.innerHTML = (faixaAudio) + " - " + textArray[faixaAudio][0].replace(";", ",");
   }
   if (event.key == 'e') {
     document.querySelector('.square2').classList.toggle('menuAnimation');
@@ -170,6 +171,10 @@ document.addEventListener("keydown", function (event) {
   if (event.key == 'p') {
     audioSelect.pause();
     listenerAudioEnd = false;
+
+  }
+  if (event.key == 't') {
+    texto_completo();
 
   }
 
@@ -185,18 +190,29 @@ audioSelect.addEventListener('ended', () => {
 
 });
 ///////////////////////////////
+function texto_completo() {
+  var textoNovo = [];
+    textArray.forEach((item)=>{
+      textoNovo.push(item[0]);
+    });
+  texCompleto.innerHTML = textoNovo.join(" ").replace(";", ",");
+}
+
+
+
 
 ///////////////////////////////
 function iniciar() {
 
-  for (var i = 0; i < textArray.length - 1; i++) {
+  for (var i = 0; i < textArray.length ; i++) {
     CriarDIV(textArray[i][0], i);
   }
-  for (var i = 0; i < textArray.length - 1; i++) {
+  for (var i = 0; i < textArray.length ; i++) {
     alterarDIV(textArray[i][0], textArray[i][1], i);
   }
 }
 button.addEventListener("click", () => {
+  texto_completo();
   iniciar();
 });
 ///////////////////////////////
