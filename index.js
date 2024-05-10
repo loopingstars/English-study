@@ -170,7 +170,9 @@ document.addEventListener("keydown", function (event) {
   }
   if (event.key == 'p') {
     audioSelect.pause();
+    audioIndexAudios = 0;
     listenerAudioEnd = false;
+    
 
   }
   if (event.key == 't') {
