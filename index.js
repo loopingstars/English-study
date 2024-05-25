@@ -80,6 +80,7 @@ function alterarDIV(textoInglesParam, textoTraduzidoParam, number) {
   div.classList.toggle('TextiJS');
   textoIngles.classList.toggle('TextoInglesJS');
   textoTraduzido.classList.toggle('TextoTraduzidoJS');
+  textoTraduzido.classList.toggle('TextoTraduzidoBLUR');
 }
 ///////////////////////////////
 
@@ -175,9 +176,19 @@ document.addEventListener("keydown", function (event) {
     
 
   }
-  if (event.key == 't') {
-    texto_completo();
 
+  if (event.key == 'b') {
+    console.log("32");
+    var cssRuleList = [...document.styleSheets[0].cssRules].filter(rule => rule.selectorText == ".TextoTraduzidoBLUR");
+    for (let cssRule of cssRuleList) {
+      cssRule.style.filter = "blur(5px)";
+    }
+  }
+  if (event.key == 'v') {
+    var cssRuleList = [...document.styleSheets[0].cssRules].filter(rule => rule.selectorText == ".TextoTraduzidoBLUR");
+    for (let cssRule of cssRuleList) {
+      cssRule.style.filter = "blur(0px)";
+    }
   }
 
 });

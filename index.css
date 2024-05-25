@@ -62,7 +62,7 @@ body {
 #button {
     justify-self: center;
     width: 70px;
-    height: 50px;
+    height: 30px;
     border: none;
     color: rgb(255, 255, 255);
     background-color: #3333337a;
@@ -97,8 +97,8 @@ body {
         transform: rotate(0deg);
         color: #000000;
         background-color: #ffffff;
-        width: 100px;
-        height: 60px;
+        width: 120%;
+        height: 120%;
     }
 }
 
@@ -144,6 +144,10 @@ body {
     font-size: 6vh;
     background-color: #e7dfdf;
     color: #000000;
+}
+
+.TextoTraduzidoBLUR{
+    filter: blur(0px);
 }
 
 .TextoTraduzidoJS {
@@ -267,7 +271,7 @@ select:hover {
     select {
         font-size: 3dvh;
     }
-
+  
 
 }
 
@@ -275,7 +279,10 @@ select:hover {
     .labels {
         font-size: 2dvh;
     }
-
+  
+        
+        
+    }
     select {
         font-size: 3dvh;
     }
