@@ -15,6 +15,9 @@ var AudioTexto = [];
 var audioIndexAudios = 0;
 var faixaAudio = 0;
 var listenerAudioEnd = false;
+var playRateValue = 1.00;
+
+
 ///////////////////////////////
 
 ///////////////////////////////
@@ -89,6 +92,7 @@ function alterarDIV(textoInglesParam, textoTraduzidoParam, number) {
 ///////////////////////////////
 function play_audio(Path) {
   audioSelect.setAttribute('src', Path);
+  audioSelect.playbackRate=playRateValue;
   audioSelect.play();
 }
 
@@ -167,14 +171,15 @@ document.addEventListener("keydown", function (event) {
 
   if (event.key == 'r') {
     listenerAudioEnd = true;
+    audioIndexAudios = 0;
     executarAudios();
+    
   }
   if (event.key == 'p') {
     audioSelect.pause();
     audioIndexAudios = 0;
     listenerAudioEnd = false;
-    
-
+  
   }
 
   if (event.key == 'b') {
@@ -190,6 +195,18 @@ document.addEventListener("keydown", function (event) {
       cssRule.style.filter = "blur(0px)";
     }
   }
+  if (event.key == 'n') {
+    if (playRateValue > 0) {
+      AlterarVelocidade((playRateValue - 0.10).toFixed(2));
+    }
+    
+  }
+  if (event.key == 'm') {
+    if (playRateValue < 1.50) {
+      AlterarVelocidade((parseFloat(playRateValue) + 0.1).toFixed(2));
+    }
+    
+  }
 
 });
 
@@ -202,7 +219,9 @@ audioSelect.addEventListener('ended', () => {
   }
 
 });
-///////////////////////////////
+///////////////Criar um texto completo com as divs////////////////
+
+
 function texto_completo() {
   var textoNovo = [];
     textArray.forEach((item)=>{
@@ -214,6 +233,17 @@ function texto_completo() {
 
 
 
+///////////////////////////////
+
+///////////////////////////////
+///Alterar velocidade do audio
+///////////////////////////////
+///////////////////////////////
+function AlterarVelocidade(value){
+  playRateValue = value;
+  document.querySelector('#Ranger').innerHTML = value;
+  console.log(value);
+}
 ///////////////////////////////
 function iniciar() {
 

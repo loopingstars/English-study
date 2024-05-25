@@ -13,11 +13,17 @@
      <header id="header">
           <img id="header-logo" src="./source/img/eng.png" alt="Livro de inglês">
           <p id="faixaAtual"></p>
+          <p  id="Ranger"></p>
           <img src="./source/img/modo2-noturno.png" class="diaEnoiteFunc" id="diaEnoite" alt="dia/noite">
      </header>
 
      <audio id="audio-play" src=""></audio>
      <menu class="square2" id="menu">
+          
+          <div>
+               <input onchange="AlterarVelocidade(value=value)" type="range" id="playRanger" name="playRanger" min="0.10" max="1.00" value="1" step="0.10"/>
+               <label for="playRanger"></label>
+          </div>
           <label class="labels" for="input">Text</label>
           <label class="labels" for="filepicker">Audio</label>
           <input class="inputs" id="input" type="file">
